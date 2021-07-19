@@ -1,6 +1,6 @@
 # capacitor-sync-version · ![npm package version](https://img.shields.io/npm/v/capacitor-sync-version?style=flat-square)
 
-Sync npm package version to target platform of the capacitor.
+Syncing version from package.json to target platform in the capacitor projects.
 
 Currently supported platforms are: `[android, ios]`.
 
@@ -10,38 +10,39 @@ Currently supported platforms are: `[android, ios]`.
 npm add --save-dev capacitor-sync-version
 ```
 
+## Additional preparation for Android only
+
+**Step 1**. Create a file named `app.properties` in `./android/app/`, then add the following properties:
+
+```
+versionName: 0.0.1
+versionCode: 1
+```
+These properties will be updated when capacitor-sync-version running.
+
+**Step 2**. Adjust codes to referrence these properties in `./android/app/build.gradle`.
+
+* Add the following codes after `apply plugin: 'com.android.application'`:
+
+  ```
+  def appProperties = new Properties();
+  file("app.properties").withInputStream { appProperties.load(it) }
+  ```
+
+* Update properties in `defaultConfig {}` block:
+
+  ```
+  defaultConfig {
+    versionCode appProperties.getProperty("versionCode").toInteger()
+    versionName appProperties.getProperty("versionName")
+  }
+  ```
+
 ## Usage
 
-### Additional preparation for Android only
+The simplest way to use `capacitor-sync-version` is executing it in the [capacitor hooks](https://capacitorjs.com/docs/cli/hooks).
 
-1. Create a file named `app.properties` in `./android/app/`, then add the following properties:
-
-    ```
-    versionName: 0.0.1
-    versionCode: 1
-    ```
-
-2. Adjust codes to referrence these properties in `./android/app/build.gradle`.
-
-    * Add the following codes after `apply plugin: 'com.android.application'`:
-
-      ```
-      def appProperties = new Properties();
-      file("app.properties").withInputStream { appProperties.load(it) }
-      ```
-
-    * Set properties in `defaultConfig {}` block:
-
-      ```
-      defaultConfig {
-        versionCode appProperties.getProperty("versionCode").toInteger()
-        versionName appProperties.getProperty("versionName")
-      }
-      ```
-
-### Excute `capacitor-sync-version` in [capacitor hooks](https://capacitorjs.com/docs/cli/hooks)
-
-Adding the following script to `package.json`:
+Just adding the following script to `package.json`:
 
 ```json
 {
