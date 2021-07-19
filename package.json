@@ -1,6 +1,6 @@
 {
   "name": "capacitor-sync-version",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "Sync npm package version to target platform of the capacitor.",
   "bin": {
     "capacitor-sync-version": "dist/index.js"
