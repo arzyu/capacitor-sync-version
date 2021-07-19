@@ -27,7 +27,8 @@ const program = new Command();
 
 program
   .usage("[capacitor-platform-name...]")
-  .version(pkgInfo.version)
+  .version(pkgInfo.version, "-v, --version", `Print ${pkgInfo.name} version`)
+  .helpOption("-h, --help", "Print this help")
   .parse(process.argv);
 
 const args = program.args;
@@ -41,12 +42,17 @@ if (!platforms.length && process.env.CAPACITOR_PLATFORM_NAME) {
 // ignore web
 platforms = platforms.filter(p => p !== "web");
 
+if (!platforms.length) {
+  console.log(chalk`  {red Missing platform name. Nothing to do.}`);
+  process.exit();
+}
+
 const supportedPlatforms = Object.values(Platform) as string[];
 const invalidPlatform = platforms.find(platform => !supportedPlatforms.includes(platform));
 
 if (invalidPlatform) {
   log(chalk`\n  {red Unsupported platform name: "${invalidPlatform}". Nothing to do.}`);
-  process.exit(1);
+  process.exit();
 }
 
 (async () => {
