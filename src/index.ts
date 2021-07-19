@@ -1,4 +1,5 @@
 #!/usr/bin/env node
+
 import { resolve } from "path";
 
 import chalk from "chalk";
@@ -8,10 +9,17 @@ import { log, readPackage } from "./utils";
 import { syncAndroid } from "./sync-android";
 import { syncIos } from "./sync-ios";
 
+// define supported syncing platform
 enum Platform {
   android = "android",
   ios = "ios",
 }
+
+// mount all syncing methods
+const sync: Record<Platform, () => Promise<void>> = {
+  android: syncAndroid,
+  ios: syncIos
+};
 
 const pkgInfo = readPackage(resolve(__dirname, "../package.json"));
 
@@ -40,11 +48,6 @@ if (invalidPlatform) {
   log(chalk`\n  {red Unsupported platform name: "${invalidPlatform}". Nothing to do.}`);
   process.exit(1);
 }
-
-const sync: Record<Platform, () => Promise<void>> = {
-  android: syncAndroid,
-  ios: syncIos
-};
 
 (async () => {
   for (const [i, platform] of (platforms as Platform[]).entries()) {
