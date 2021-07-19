@@ -1,6 +1,7 @@
 # capacitor-sync-version · ![npm package version](https://img.shields.io/npm/v/capacitor-sync-version?style=flat-square)
 
 Sync npm package version to target platform of the capacitor.
+
 Currently supported platforms are: `[android, ios]`.
 
 ## Installation
