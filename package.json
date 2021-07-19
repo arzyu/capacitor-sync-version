@@ -13,6 +13,7 @@
   "scripts": {
     "prebuild": "rimraf dist # rm -rf dist",
     "build": "tsc",
+    "postbuild": "chmod +x dist/index.js",
     "prepare": "npm run build"
   },
   "dependencies": {
