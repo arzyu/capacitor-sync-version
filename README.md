@@ -15,8 +15,8 @@ npm add --save-dev capacitor-sync-version
 **Step 1**. Create a file named `app.properties` in `./android/app/`, then add the following properties:
 
 ```
-versionName: 0.0.1
-versionCode: 1
+versionName=0.0.1
+versionCode=1
 ```
 These properties will be updated when capacitor-sync-version running.
 
