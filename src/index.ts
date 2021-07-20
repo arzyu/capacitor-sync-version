@@ -35,17 +35,17 @@ const args = program.args;
 
 let platforms = [...args];
 
-if (!platforms.length && process.env.CAPACITOR_PLATFORM_NAME) {
-  platforms.push(process.env.CAPACITOR_PLATFORM_NAME);
+if (!platforms.length){
+  if(process.env.CAPACITOR_PLATFORM_NAME) {
+    platforms.push(process.env.CAPACITOR_PLATFORM_NAME);
+  } else {
+    console.log(chalk`  {red Missing platform name. Nothing to do.}`);
+    process.exit();
+  }
 }
 
 // ignore web
 platforms = platforms.filter(p => p !== "web");
-
-if (!platforms.length) {
-  console.log(chalk`  {red Missing platform name. Nothing to do.}`);
-  process.exit();
-}
 
 const supportedPlatforms = Object.values(Platform) as string[];
 const invalidPlatform = platforms.find(platform => !supportedPlatforms.includes(platform));
