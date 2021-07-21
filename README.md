@@ -1,4 +1,6 @@
-# capacitor-sync-version · ![npm package version](https://img.shields.io/npm/v/capacitor-sync-version?style=flat-square)
+# capacitor-sync-version
+
+![npm package version](https://img.shields.io/npm/v/capacitor-sync-version?style=flat-square) ![PRs Welcome](https://img.shields.io/badge/PRs-welcome-green?style=flat-square)
 
 Syncing version from package.json to target platform in the capacitor projects.
 
