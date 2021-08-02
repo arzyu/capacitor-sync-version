@@ -31,6 +31,6 @@ export const syncIos = async () => {
 
   content = plist.build(infoPlist);
 
-  writeFileSync(infoPlistPath, content, { encoding: "utf8" });
+  writeFileSync(infoPlistPath, `${content}\n`, { encoding: "utf8" });
   log(chalk`{green ✔} Sync version ${version} for ios.`);
 };
