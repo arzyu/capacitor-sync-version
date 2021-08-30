@@ -21,7 +21,7 @@
     "chalk": "^4.1.1",
     "commander": "^8.0.0",
     "load-json-file": "^6.2.0",
-    "plist": "^3.0.2",
+    "plist": "^3.0.4",
     "properties-reader": "^2.2.0",
     "semver": "^7.3.5"
   },
