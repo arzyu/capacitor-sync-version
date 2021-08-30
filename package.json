@@ -1,6 +1,6 @@
 {
   "name": "capacitor-sync-version",
-  "version": "1.0.5",
+  "version": "1.0.6",
   "description": "Syncing version from package.json to target platform in the capacitor projects.",
   "bin": {
     "capacitor-sync-version": "dist/index.js"
