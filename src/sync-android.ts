@@ -15,7 +15,7 @@ const generateVersionCode = (version: string) => {
 };
 
 export const syncAndroid = async () => {
-  const { version } = readPackage(resolve(process.cwd(), "package.json"));
+  const { version, build } = readPackage(resolve(process.cwd(), "package.json"));
 
   if (!valid(version)) {
     log(chalk`  {red Invalid version: "${version}". Nothing to do.}`);
@@ -24,8 +24,12 @@ export const syncAndroid = async () => {
 
   const appProps = readProps(appPropertiesPath);
   const newVersionCode = generateVersionCode(version);
-
-  appProps.set("versionCode", newVersionCode);
+  
+  if (!valid(build)) {
+    build = newVersionCode;
+  }
+  
+  appProps.set("versionCode", build);
   appProps.set("versionName", version);
 
   const [err] = await to(appProps.save(appPropertiesPath));
