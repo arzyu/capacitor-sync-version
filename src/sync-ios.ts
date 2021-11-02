@@ -15,11 +15,14 @@ type PlistVersion = {
 const infoPlistPath = resolve(process.cwd(), "ios/App/App/Info.plist");
 
 export const syncIos = async () => {
-  const { version } = readPackage(resolve(process.cwd(), "package.json"));
+  const { version, build } = readPackage(resolve(process.cwd(), "package.json"));
 
   if (!valid(version)) {
     log(chalk`  {red Invalid version: "${version}". Nothing to do.}`);
     process.exit();
+  }
+  if (!valid(build)) {
+    build = version;
   }
 
   let content = readFileSync(infoPlistPath, { encoding: "utf8" });
@@ -27,7 +30,7 @@ export const syncIos = async () => {
   const infoPlist = plist.parse(content) as PlistVersion;
 
   infoPlist.CFBundleShortVersionString = version;
-  infoPlist.CFBundleVersion = version;
+  infoPlist.CFBundleVersion = build;
 
   content = plist.build(infoPlist);
 
