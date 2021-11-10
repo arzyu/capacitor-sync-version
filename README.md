@@ -42,7 +42,7 @@ These properties will be updated when capacitor-sync-version running.
 
 ## Usage
 
-The simplest way to use capacitor-sync-version is executing it in the [capacitor hooks](https://capacitorjs.com/docs/cli/hooks).
+The simplest way to use capacitor-sync-version is running it in the [capacitor hooks](https://capacitorjs.com/docs/cli/hooks).
 
 Just adding the following script to `package.json`:
 
@@ -54,9 +54,9 @@ Just adding the following script to `package.json`:
 }
 ```
 
-In this way, capacitor-sync-version will be executed before capacitor copy command, e.g., `npx cap copy`.
+In this way, capacitor-sync-version will be run before capacitor copy command, e.g., `npx cap copy`.
 
-Other ways to execute capacitor-sync-version are:
+Other ways to run capacitor-sync-version are:
 
 ```shell
 # sync for android only
